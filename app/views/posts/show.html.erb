@@ -36,12 +36,13 @@
                     <h5 class="user-post"><%=  (@post.title.length > 280 ? @post.title.first(280) + ' . . . . .' : @post.title)%></h5>
                 </div>
             </div>
-            <%= render 'like'%>
+
             <% if @post.image.attached? %>
                 <div class="user-post-image">
                     <%= link_to image_tag(@post.image, class: 'showPost-image'), post_path(@post)%>
                 </div>
             <% end %>
+            <%= render 'like'%>
         </div>
         
     </div>
