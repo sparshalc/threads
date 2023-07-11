@@ -1,0 +1,45 @@
+<style>
+  .signup-form{
+    margin-top: 80px !important;
+  }
+</style>
+<div class="container text-center col-sm-4  signup-form">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <!-- <%= render "devise/shared/error_messages", resource: resource %> -->
+    <main class="form-signin w-100">
+      <form>
+        <%= image_tag('img/thread-white.png', width: '150px', class: 'form-image')%>
+        <h1 class="display-2 text-white" >SIGN UP</h1>
+        <div class="form-floating mt-4">
+          <%= f.file_field :image%>
+        </div>
+        <div class="form-floating mt-4">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control mt-3' %>
+          <label for="floatingInput">Email address</label>
+          <% resource.errors.full_messages_for(:email).each do |message| %>
+          <li ><%= message %></li>
+          <% end %>
+        </div>
+
+        <div class="form-floating">
+          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control mt-3', resize: 'false' %>
+          <label for="floatingPassword">Password</label>
+          <% resource.errors.full_messages_for(:password).each do |message| %>
+          <li ><%= message %></li>
+          <% end %>
+        </div>
+        <div class="form-floating">
+          <%= f.password_field :password_confirmation, class:'form-control mt-3', autocomplete: "new-password" %>
+          <label for="floatingPassword">Confirm Password</label>
+          <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
+          <li ><%= message %></li>
+          <% end %>
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
+      </form>
+    </main>
+    <%= render "devise/shared/links" %>
+  <% end %>
+</div>

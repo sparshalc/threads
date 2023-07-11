@@ -1,0 +1,39 @@
+<div class="content show-margin">
+  <div class="contNew"></div>
+  <% if current_user.follow_requests.count > 0%>
+  <h2 class="fw-bold mt-5">User Threads</h2>
+  <% end %>
+              <div class="user-info">
+                  <div class="name-post">
+                      <div class="name-time white">
+                        <% if current_user %>
+                          <% current_user.follow_requests.each do |request| %>
+                            <%= request.followerable.email %> wants to follow you
+                            <div class="d-flex">
+                                <%= button_to "Accept", accept_path(request.followerable), class:'btn btn-primary' %>
+                                <%= button_to "Decline", decline_path(request.followerable), class:'btn btn-danger mx-2' %>
+                            </div>
+                          <% end %>
+                      </div>
+                  </div>
+              </div>
+              <% if current_user.followers.count > 0%>
+                  <div class="user-post-image white">
+                    <h2 class="fw-bold mt-5">Recent Logs</h2>
+                    <% current_user.followers.each do |user| %>
+                    <div class="d-flex justify-content-between">
+                        <div><%= link_to user.email, user_path(user.id) %> started following you....</div>
+                        <div class="btn">
+                            <%= button_to "Unfollow", unfollow_path(user), class:'btn btn-danger' %>
+                        </div>
+                    </div>
+                <% end %>
+                <% else %> 
+                <h2 class="fw-bold mt-5">No Recent Logs</h2>
+                <% end %>
+                <%= link_to 'Go back', :back, class: 'btn text-secondary'%>
+                </div>
+            <% end %>
+</div>
+
+

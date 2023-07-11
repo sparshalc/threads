@@ -1,0 +1,83 @@
+<div class="backIcon">
+    <%= link_to :back do %>
+    <span class="fa fa-arrow-left fa-lg"></span> 
+    <% end %>
+</div>
+<div class="content ">
+    <div class="contNew"></div>
+        <div class="cont"> 
+                <div class="d-flex justify-content-between">
+                    <div class="main">
+                    <h2 class="userEmail"><%= @user.email%></h2>  
+                    <h5 class="text-secondary mt-3">Joined <%= time_ago_in_words(@user.created_at) + ' ago'%></h5 >
+                        
+                    <div class="followersCount mt-4 text-secondary">
+                        <h6><%= @user.followers.all.count %> Followers</h6>
+                        <% if @user.followers.all.count > 0 %>
+                            <% current_user.followers.all.limit(1).order("RANDOM()").each do |x|%>
+                            <div class="text-muted"> Followed by <%= x.email %> and others.</div>
+                            <% end %>
+                        <% else %>
+                        <div class="text-muted"> No followers.</div>
+                        <%  end  %>
+                    </div>
+                </div>
+                <div class="userImage">
+                    <% if @user.image.attached? %>
+                    <%= image_tag(@user.image, class: 'profilePictureShow')  %>
+                    <% else %>
+                    <%= image_tag('img/thread-white.png', width: '100px')  %>
+                    <% end %>
+                </div>
+            </div>
+            <% if current_user.id != @user.id%>
+                <% if current_user.following?(@user) %>
+                        <%= button_to "Unfollow", unfollow_path(@user), class:'btn btn-primary' %>
+                <% elsif current_user.sent_follow_request_to?(@user)%>
+                        <%= button_to "Cancel follow request", cancel_path(@user), class:'btn btn-primary' %>
+                <% else %>
+                        <%= button_to "Follow",  follow_path(@user), class:'btn btn-primary' %>
+                <% end %>
+            <% end %>
+            <% if current_user.id == @user.id%>
+            <div class="d-flex mt-5">
+                <%= link_to  'Edit Profile', edit_user_registration_path , class:'btn btn-primary' %>
+                <li> <%= button_to 'Logout',main_app.destroy_user_session_path,class:'mx-2 btn btn-danger',method: :delete%></li>
+            </div>
+            <% end %>
+        </div>
+        <% if @user.posts.count > 0 %>
+            <h2 class="fw-bold mt-5">User Threads</h2>
+            <% @user.posts.order("Created_at DESC").each do |x|%>
+                <div class="cont"> 
+                    <div class="posts">
+                        <div class="user-info">
+                            <div class="image">
+                                <% if @user.image.attached? %>
+                                <%= image_tag(@user.image, class: 'profilePicture')  %>
+                                <% else %>
+                                <%= image_tag('img/thread-white.png', width: '50px')  %>
+                                <% end %>
+                            </div>
+                            <div class="name-post">
+                                <div class="name-time">
+                                    <p class="user-name"><%= x.user.email %></p>
+                                    <p><%= time_ago_in_words(x.created_at) + ' ago'%></p>
+                                </div>
+                                <h5 class="user-post"><%= link_to (x.title.length > 280 ? simple_format(x.title.first(280)) + ' . . . . .' : simple_format(x.title)) , post_path(x), class: 'noDecoration' %></h5>
+                            </div>
+                        </div>
+                        <% if x.image.attached? %>
+                            <div class="user-post-image">
+                                <%= link_to image_tag(x.image, class: 'post-image'), post_path(x)%>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+         <% else %>
+            <h2 class="fw-sm text-muted">User hasn't posted any threads yet.</h2>
+         <% end %>
+
+</div>
+

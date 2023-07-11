@@ -1,0 +1,56 @@
+<div class="backIcon d-flex">
+    <%= link_to :back do %>
+    <span class="fa fa-arrow-left fa-lg"></span> 
+    <% end %>
+</div>
+<div class="content show-margin">
+    <div class="cont"> 
+        <div class="posts">
+            <div class="user-info">
+                <% if @post.user.image.attached? %>
+                <div class="image">
+                    <%= image_tag(@post.user.image, width: '50px', class: 'profilePicture')  %>
+                </div>
+                <% else %>
+                <div class="image">
+                    <%= image_tag(('img/thread-white.png'), width: '50px', class: 'profilePicture')%>
+                </div>
+                <% end %>
+                <div class="name-post">
+                    <div class="name-time">
+                        <p class="user-name"><%= @post.user.email%></p>
+                        <div class="d-flex text-secondary"><%= time_ago_in_words(@post.created_at) + ' ago'%>
+                            <% if current_user.id == @post.user.id%>
+                                <div class="dropdown dropdown-sm mx-2">
+                                    <button class="btn btn-sm btn-dark dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <%= link_to 'Edit',edit_post_path(@post), class: ' dropdown-item'%>
+                                        <%= button_to 'Destroy' , post_path(@post.id), class:'dropdown-item text-danger', data:
+                                                {'turbo-method': :delete}, data: { turbo: "false" }, method: :delete%>
+                                    </ul>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                    <h5 class="user-post"><%=  (@post.title.length > 280 ? @post.title.first(280) + ' . . . . .' : @post.title)%></h5>
+                </div>
+            </div>
+            <%= render 'like'%>
+            <% if @post.image.attached? %>
+                <div class="user-post-image">
+                    <%= link_to image_tag(@post.image, class: 'showPost-image'), post_path(@post)%>
+                </div>
+            <% end %>
+        </div>
+        
+    </div>
+</div>
+
+<div class="content">
+    <div class="contComment"> 
+        <%= render 'comments/form'%>
+    </div>
+</div>
+
+<%= render 'comments/comment'%>

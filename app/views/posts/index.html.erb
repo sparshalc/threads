@@ -1,0 +1,31 @@
+<div class="content">
+    <%= render 'form'%>
+    <% @posts.each do |x|%>
+        <div class="cont"> 
+            <div class="posts">
+                <div class="user-info">
+                    <div class="image">
+                        <% if x.user.image.attached? %>
+                        <%=  image_tag(x.user.image, class: 'profilePicture')  %>
+                        <% else %>
+                        <%= image_tag('img/thread-white.png', width: '50px')  %>
+                        <% end %>
+                    </div>
+                    <div class="name-post">
+                        <div class="name-time">
+                            <p class="user-name"><%= link_to x.user.email,  user_path(x.user.id), class: 'noDecoration'  %></p>
+                            <p><%= time_ago_in_words(x.created_at) + ' ago'%></p>
+                        </div>
+                        <h5 class="user-post"><%= link_to (x.title.length > 280 ? simple_format(x.title.first(280)) + ' . . . . .' : simple_format(x.title)) , post_path(x), class: 'noDecoration' %></h5>
+                    </div>
+                </div>
+                <% if x.image.attached? %>
+                    <div class="user-post-image">
+                        <%= link_to image_tag(x.image, class: 'post-image'), post_path(x)%>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>
+

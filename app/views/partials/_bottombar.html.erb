@@ -1,0 +1,31 @@
+<div class="altmenu">
+<ul>
+  <li><%= link_to recent_posts_path do%>
+    <span class="fa fa-clock"></span>
+  <% end %>
+  <li><%= link_to profile_path(current_user) do%>
+      <% if current_user.follow_requests.count > 0 %>
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      <% else %>
+          <i class="fa fa-wifi"></i>
+      <% end %>
+      <% end %>
+  </a></li>
+  <% if current_user.followers.present? %>
+    <li><%= link_to recent_post_path do%>
+    <span class="fa fa-globe"></span>
+    <% end %>
+  <% end %>
+  <li><%= link_to notifications_path do%>
+    <span class="fa fa-heart"></span>
+  <% end %>
+  <li><%= link_to user_path(current_user) do%>
+    <span class="fa fa-user"></span>
+  <% end %>
+
+</ul>
+</div>
+
+
+
+

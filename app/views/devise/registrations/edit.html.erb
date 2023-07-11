@@ -1,0 +1,47 @@
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { turbo: "false" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3 text-white">Change user settings!</h1>
+      <p class="col-lg-10 fs-4 text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam corporis molestiae pariatur recusandae soluta eius adipisci laboriosam reprehenderit nulla doloremque, et nobis autem. Vitae, illum
+    </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 p-md-5 border rounded-3 bg-light">
+        <div class="form-floating mb-3">
+          <%= f.file_field :image %>
+        </div>
+        <div class="form-floating mb-3"> 
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control' %>
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
+          <label for="floatingPassword">New Password</label>
+        </div>
+        <div class="form-floating mb-3">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control' %>
+          <label for="floatingPassword">Confirm your Password</label>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>    
+        <div class="form-floating mb-3">
+          <%= f.password_field :current_password, autocomplete: "current-password", class:'form-control' %>
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <%= f.submit "Update", class: 'w-100 btn btn-lg btn-primary' %>
+        <%= link_to "Back", root_path,class: 'w-100 btn btn-lg btn-primary mt-2' %>
+        <hr class="my-4">
+            
+        <p><%= link_to "Delete Permanently", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger text-red w-100' %> </p>
+        <small class="text-white">Going back at this stage doesnt change your account settings</small>
+      </form>
+    </div>
+
+    <% end %>
+  </div>
+</div>

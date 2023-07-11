@@ -1,0 +1,52 @@
+<div class="backIcon">
+    <%= link_to :back do %>
+    <span class="fa fa-arrow-left fa-lg"></span> 
+    <% end %>
+</div>
+<div class="content">
+    <div class="contNew"></div>
+    <h2 class="fw-bold mb-4 display-4">All Posts</h2>
+    <%if params[:controller].eql?('recent') && params[:action].eql?('posts') %>
+    <li class="searchForm">
+        <div>
+            <form role="search">
+                <%= search_form_for @q do |f| %>
+                    <%= f.search_field :title_cont,:placeholder => 'Search threads', class: 'search-form'%>
+                <% end %>
+            </form>
+        </div>
+    </li>
+    <% end %>
+    <% @posts.each do |x|%>
+        <div class="cont"> 
+            <div class="posts">
+                <div class="user-info">
+                    <div class="image">
+                        <% if x.user.image.attached? %>
+                        <%=  image_tag(x.user.image, class: 'profilePicture')  %>
+                        <% else %>
+                        <%= image_tag('img/thread-white.png', width: '50px')  %>
+                        <% end %>
+                    </div>
+                    <div class="name-post">
+                        <div class="name-time">
+                            <p class="user-name"><%= link_to x.user.email,  user_path(x.user.id), class: 'noDecoration'  %></p>
+                            <p><%= time_ago_in_words(x.created_at) + ' ago'%></p>
+                        </div>
+                        <h5 class="user-post"><%= link_to (x.title.length > 280 ? simple_format(x.title.first(280)) + ' . . . . .' : simple_format(x.title)) , post_path(x), class: 'noDecoration' %></h5>
+                    </div>
+                </div>
+                <% if x.image.attached? %>
+                    <div class="user-post-image">
+                        <%= link_to image_tag(x.image, class: 'post-image'), post_path(x)%>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+
+
+
+

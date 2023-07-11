@@ -1,0 +1,26 @@
+<style>
+  .reset-form{
+    margin-top: 120px;
+  }
+</style>
+<div class="container reset-form col-xl-10 col-xxl-8 px-4 py-5">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3  text-white">Reset your Password!</h1>
+      <p class="col-lg-10 fs-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum veniam commodi neque molestias facilis? Quibusdam officia, itaque illo eaque officiis, fugit, voluptas praesentium voluptatum quidem sed voluptate nam laudantium ullam!</p>
+    </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 p-md-5 border rounded-3 bg-light">
+        <div class="form-floating mb-3">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: 'form-control'%>
+          <label for="floatingInput">Email address</label>
+        </div>
+        <%= f.submit "Send me reset instructions", class: 'w-100 btn btn-lg btn-primary' %>
+        <hr class="my-4 text-white">
+      </form>
+    </div>
+    <% end %>
+  </div>
+</div>

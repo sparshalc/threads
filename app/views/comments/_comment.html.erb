@@ -1,0 +1,36 @@
+<% if @post.comments.count > 0%>
+  <h2 class="fw-bold mt-5 text-center">Threads Replies</h2>
+<% end %>
+<div class="content">
+<% if @post.comments.count <= 0%>
+<% else %>
+  <% @comment.each do |x|%>
+    <div class="cont"> 
+        <div class="posts">
+            <div class="user-info">
+                <div class="image">
+                  <%= image_tag(x.user.image, class: 'profilePicture') %>
+                </div>
+                <div class="name-post">
+                    <div class="name-time">
+                        <p class="user-name"><%= x.user.email%> </p>
+                        <div class="d-flex text-secondary"><%= time_ago_in_words(x.created_at) + ' ago'%>
+                            <% if  x.user_id == current_user.id%>
+                                <div class="dropdown dropdown-sm mx-2">
+                                    <button class="btn btn-sm btn-dark dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <%= button_to 'Delete', [x.post, x], class: 'dropdown-item ',method: :delete, data: {'turbo-method': :delete}, data: { turbo: "false" } if x.user_id == current_user.id%>
+                                    </ul>
+                                </div>
+                            <% end %>
+                          </div>
+                        </div>
+                        <h5 class="user-post"><%=  (x.title.length > 280 ? x.title.first(280) + ' . . . . .' : x.title)%></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+  <% end %>
+<% end %>
+</div>

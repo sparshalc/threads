@@ -1,0 +1,40 @@
+<div class="notifications ">
+  <div class="heading clearfix">
+    <!-- <%= t('notifications.all_notifications') %> -->
+
+
+  </div>
+  <div class="list">
+    <% if @notifications.blank? %>
+      <!-- <div class="no-records"><%= t('notifications.no_records') %></div> -->
+      <div class="content mt-5">
+        <div class="contNew"></div>
+        <h2 class="fw-bold mt-5">No New Notification</h2>
+        <%= image_tag('img/thread-white.png', width: '200px', class: 'form-image')%>
+          <div class="cont"> 
+          </div>
+          <%= link_to 'Go back', :back, class: 'btn text-secondary'%>
+        </div>
+    <% else %>
+      <% @notification_groups.each do |group, notifications| %>
+        <div class="notification-group">
+          <!-- <div class="group-title"><%= group %></div> -->
+          <div class="content">
+            <div class="contNew"></div>
+            <h2 class="fw-bold mt-5">Notifications</h2>
+              <div class="cont"> 
+                <%= render notifications, class: 'mt-4' %>
+              </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="text-center">
+      <span class="pull-xs-right">
+        <%= link_to t('notifications.clean_all'), notifications.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
+        <%= link_to 'Go back', :back, class: 'btn text-secondary'%>
+      </span>
+    </div>
+    <% end %>
+  </div>
+  <%= paginate @notifications %>
+</div>

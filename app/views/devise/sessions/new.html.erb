@@ -1,0 +1,34 @@
+<style>
+  .login-form{
+    margin-top: 80px !important;
+  }
+</style>
+
+<div class="container login-form text-center col-sm-4  mt-4">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+   <%= render "devise/shared/error_messages", resource: resource %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+    <main class="form-signin w-100 m-auto">
+      <form>
+        <%= image_tag('img/thread-white.png', width: '150px',class: 'form-image')%>
+        <h1 class="mt-2 display-2 text-white">LOGIN</h1>
+        <div class="form-floating">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:' form-control', class: 'form-control mt-3' %>
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          <%= f.password_field :password, autocomplete: "current-password", class:' form-control mt-3' %>
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="checkbox mt-2">
+          <label  class="text-white">
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <%= f.submit "Log in",  class: "w-100 btn btn-lg btn-primary mt-5"%>
+        <%= render "devise/shared/links" %>
+      </form>
+    </main>
+  <% end %>
+</div>

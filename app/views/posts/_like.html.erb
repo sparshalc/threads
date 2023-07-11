@@ -1,0 +1,24 @@
+<% if user_signed_in? %>
+<% like = current_user.likes.find_by(post: @post)%>
+<hr class="white">
+<div class="d-flex">
+    <div class="like mx-5">
+        <% if like.nil? %>
+        <div class="mx-2 white"><%= @post.likes.count%> Like</div>
+        <%= button_to  likes_path, params: {like: {post_id: @post.id}},method: :post,class: 'btn', data: {'turbo-method': :post}, data: { turbo: "false" } do %>
+        <%= image_tag('img/like.svg', width: '30px', class: 'whiteBnt')%> 
+        <% end %>
+        <% else %>
+        <div class="mx-2 white"><%= @post.likes.count%> Like</div>
+        <%= button_to  like_path,method: :delete, data: {'turbo-method': :delete}, data: { turbo: "false" }, class: 'btn ' do %>
+        <%= image_tag('img/unlike.svg', width: '30px', class: 'whiteBnt')%>
+        <% end %>    
+        <% end %> 
+    </div>
+    <div class="comment comment-margin">
+        <div class="white "><%= @post.comments.count%> Comments</div>
+        <%= image_tag('img/comment.svg', width: '30px', class: 'whiteBnt mt-2 mx-4')%>
+    </div>
+</div>
+<hr class="white">
+<% end %>

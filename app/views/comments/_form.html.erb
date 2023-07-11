@@ -1,0 +1,6 @@
+<div class="contNewComment">
+    <%= form_for([@post, @post.comments.build]) do |f| %>
+    <%= f.text_area :title, class: 'textAreaComment'%> 
+    <%= f.submit 'Comment',  data: { turbo: "false" }, class: 'btn btn-primary mx-2  '%>
+    <% end %>
+</div>

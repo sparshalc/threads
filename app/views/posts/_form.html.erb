@@ -1,0 +1,27 @@
+<div class="content">
+<div class="contNew">
+        <div class="user-details">
+            <% if current_user.image.attached? %>
+                <%= image_tag(current_user.image, class: 'profilePicture')  %>
+            <% else %>
+                <%= image_tag('img/thread-white.png', width: '50px')  %>
+            <% end %>
+            <p class="fw-bold"><%= current_user.email%></p>
+        </div>
+        <%= form_with model: @post do |x|%>
+            <%= x.text_area :title, class: 'textArea', placeholder: "What's on your mind?"%>
+            <% if @post.errors.any? %>
+            <div class="text">
+                <% @post.errors.full_messages_for(:title).each do |message| %>
+                    <div class="text-danger"><%= message %></div>
+                <% end %>
+            </div>
+        <% end %>
+            <div class="text-end mt-2 mx-3">
+                <%= x.file_field :image, class: 'image-field'%>
+                <%= x.number_field :user_id, value: current_user.id,id: 'post_user_id', type: :hidden,class: 'form-control'%>
+                <%= x.submit  class: 'btn btn-primary blueButton'%>
+            </div>
+        <% end %>
+</div>
+</div>

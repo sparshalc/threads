@@ -1,0 +1,33 @@
+<div class="backIcon">
+    <%= link_to :back do %>
+    <span class="fa fa-arrow-left fa-lg"></span> 
+    <% end %>
+</div>
+<div class="content">
+    <div class="contNew"></div>
+    <h2 class="text-center display-5 fw-bold mt-4">Discover User</h2>
+    <% @user.each do |x|%>
+        <div class="cont"> 
+            <div class="posts">
+                <div class="user-info">
+                    <div class="name-post">
+                        <div class="name-time">
+                            <div class="mainInfo">
+                            <p class="user-name"><%= link_to x.email,  user_path(x), class: 'noDecoration'%></p>
+                            <p class="mt-4">Joined <%= time_ago_in_words(x.created_at) + ' ago'%></p>
+                            <p>User has published <%= x.posts.count %> threads.</p>
+                            </div>
+                            <% if x.image.attached? %>
+                                <%= link_to image_tag(x.image, class: 'profilePictureShow'), user_path(x)  %>
+                            <% else %>
+                                <%=  link_to image_tag('img/thread-white.png', width: '50px'), user_path(x)  %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+
