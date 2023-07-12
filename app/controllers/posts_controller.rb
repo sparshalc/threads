@@ -19,6 +19,7 @@ class PostsController < ApplicationController
     end
 
     def show
+        @post.update(views: @post.views+1)
         @comment = @post.comments.all
     end
 

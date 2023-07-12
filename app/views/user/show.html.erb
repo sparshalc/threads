@@ -62,7 +62,7 @@
                             <div class="name-post">
                                 <div class="name-time">
                                     <p class="user-name"><%= x.user.email %></p>
-                                    <p><%= time_ago_in_words(x.created_at) + ' ago'%></p>
+                                    <p><%= time_ago_in_words(x.created_at) + ' ago'%>    |  <%= pluralize(x.views, 'view')%></p>
                                 </div>
                                 <h5 class="user-post"><%= link_to (x.title.length > 280 ? simple_format(x.title.first(280)) + ' . . . . .' : simple_format(x.title)) , post_path(x), class: 'noDecoration' %></h5>
                             </div>
@@ -78,6 +78,5 @@
          <% else %>
             <h2 class="fw-sm text-muted">User hasn't posted any threads yet.</h2>
          <% end %>
-
 </div>
 

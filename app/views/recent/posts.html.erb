@@ -5,6 +5,7 @@
 </div>
 <div class="content">
     <div class="contNew"></div>
+    <% if @posts.count > 0 %>
     <h2 class="fw-bold mb-4 display-4">All Posts</h2>
     <%if params[:controller].eql?('recent') && params[:action].eql?('posts') %>
     <li class="searchForm">
@@ -31,7 +32,7 @@
                     <div class="name-post">
                         <div class="name-time">
                             <p class="user-name"><%= link_to x.user.email,  user_path(x.user.id), class: 'noDecoration'  %></p>
-                            <p><%= time_ago_in_words(x.created_at) + ' ago'%></p>
+                            <p><%= time_ago_in_words(x.created_at) + ' ago'%>   |  <%= pluralize(x.views, 'view')%></p>
                         </div>
                         <h5 class="user-post"><%= link_to (x.title.length > 280 ? simple_format(x.title.first(280)) + ' . . . . .' : simple_format(x.title)) , post_path(x), class: 'noDecoration' %></h5>
                     </div>
@@ -43,6 +44,12 @@
                 <% end %>
             </div>
         </div>
+    <% end %>
+    <% else %>
+    <div class="contNew text-center">
+        <h1>No Threads till date</h1>
+        <p>Follow more user to never miss their thread.</p>
+    </div>
     <% end %>
 </div>
 

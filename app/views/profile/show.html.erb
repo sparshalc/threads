@@ -1,7 +1,7 @@
 <div class="content show-margin">
   <div class="contNew"></div>
   <% if current_user.follow_requests.count > 0%>
-  <h2 class="fw-bold mt-5">User Threads</h2>
+  <h2 class="fw-bold mt-5">Follow Requests</h2>
   <% end %>
               <div class="user-info">
                   <div class="name-post">
@@ -33,7 +33,9 @@
                 <% end %>
             </div>
             <% end %>
-            <%= link_to 'Go back', :back, class: 'btn text-secondary'%>
+            <div class="text-center mt-4">
+                <%= link_to 'Go back', :back, class: 'btn text-secondary'%>
+            </div>
 </div>
 
 

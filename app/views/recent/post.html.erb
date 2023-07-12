@@ -6,38 +6,39 @@
 
 <div class="content">
     <div class="contNew"></div>
-    <% if @posts.count >= 1  %>
-    <h2 class="fw-bold mb-4 display-4">Following</h2>
-    <% @posts.each do |x|%>
-        <div class="cont"> 
-            <div class="posts">
-                <div class="user-info">
-                    <div class="image">
-                        <% if x.user.image.attached? %>
-                        <%= image_tag(x.user.image, class: 'profilePicture')  %>
-                        <% else %>
-                        <%= image_tag('img/thread-white.png', width: '50px')  %>
+        <h2 class="fw-bold mb-4 display-4">For You</h2>
+        <p class="text-muted text-center">Threads of users you have been following. <br> Might be empty if you've 0 followers or you followers hasn't posted any threads</p>
+        <% current_user.following.each do |x| %>
+            <% x.posts.each do |post| %>
+                <div class="cont"> 
+                    <div class="posts">
+                        <div class="user-info">
+                            <div class="image">
+                                <% if post.user.image.attached? %>
+                                <%= image_tag(post.user.image, class: 'profilePicture')  %>
+                                <% else %>
+                                <%= image_tag('img/thread-white.png', width: '50px')  %>
+                                <% end %>
+                            </div>
+                            <div class="name-post">
+                                <div class="name-time">
+                                    <p class="user-name"><%= post.user.email %></p>
+                                    <p><%= time_ago_in_words(post.created_at) + ' ago'%>  |  <%= pluralize(post.views, 'view')%></p>
+                                </div>
+                                <h5 class="user-post"><%= link_to (post.title.length > 280 ? post.title.first(280) + ' . . . . .' : post.title) , post_path(post), class: 'noDecoration' %></h5>
+                            </div>
+                        </div>
+                        <% if post.image.attached? %>
+                            <div class="user-post-image">
+                                <%= link_to image_tag(post.image, class: 'post-image'), post_path(post)%>
+                            </div>
                         <% end %>
                     </div>
-                    <div class="name-post">
-                        <div class="name-time">
-                            <p class="user-name"><%= x.user.email %></p>
-                            <p><%= time_ago_in_words(x.created_at) + ' ago'%></p>
-                        </div>
-                        <h5 class="user-post"><%= link_to (x.title.length > 280 ? x.title.first(280) + ' . . . . .' : x.title) , post_path(x), class: 'noDecoration' %></h5>
-                    </div>
                 </div>
-                <% if x.image.attached? %>
-                    <div class="user-post-image">
-                        <%= link_to image_tag(x.image, class: 'post-image'), post_path(x)%>
-                    </div>
-                <% end %>
-            </div>
-        </div>
-    <% end %>
-    <% else %>
-    <h2 class="fw-bold mt-5 display-5">No Threads here.</h2>
-    <p class="text-muted">Follow more user to never miss their post</p>
-    <% end %>
+        <% end %>
+        <% end %>
 </div>
+
+
+
 

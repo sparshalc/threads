@@ -19,7 +19,7 @@
                 <div class="name-post">
                     <div class="name-time">
                         <p class="user-name"><%= @post.user.email%></p>
-                        <div class="d-flex text-secondary"><%= time_ago_in_words(@post.created_at) + ' ago'%>
+                        <div class="d-flex text-secondary"><%= time_ago_in_words(@post.created_at) + ' ago'%>  |  <%= pluralize(@post.views, 'view')%>
                             <% if current_user.id == @post.user.id%>
                                 <div class="dropdown dropdown-sm mx-2">
                                     <button class="btn btn-sm btn-dark dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">

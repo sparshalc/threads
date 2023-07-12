@@ -39,6 +39,9 @@ body{
     color: white;
     text-decoration: none;
 }
+.content .contCommentValues{
+    margin-top: 0 !important;
+}
 .content .blueButton{
     border: none;
     background: #0643c7;
@@ -101,10 +104,11 @@ body{
     width: 1000px;
     height: 100%;
 }
+
 .contComment{
     padding: 0px 30px;
     z-index: 1;
-    margin-bottom: 55px;
+    margin-bottom: 75px;
     margin-top: 30px;
     width: 1000px;
     height: 100%;

@@ -1,5 +1,6 @@
 <div class="content">
     <%= render 'form'%>
+    <% if @posts.present? %>
     <% @posts.each do |x|%>
         <div class="cont"> 
             <div class="posts">
@@ -14,7 +15,7 @@
                     <div class="name-post">
                         <div class="name-time">
                             <p class="user-name"><%= link_to x.user.email,  user_path(x.user.id), class: 'noDecoration'  %></p>
-                            <p><%= time_ago_in_words(x.created_at) + ' ago'%></p>
+                            <p><%= time_ago_in_words(x.created_at) + ' ago'%>  |  <%= pluralize(@post.views, 'view')%></p>
                         </div>
                         <h5 class="user-post"><%= link_to (x.title.length > 280 ? simple_format(x.title.first(280)) + ' . . . . .' : simple_format(x.title)) , post_path(x), class: 'noDecoration' %></h5>
                     </div>
@@ -25,6 +26,12 @@
                     </div>
                 <% end %>
             </div>
+        </div>
+    <% end %>
+    <% else %>
+        <div class="contNew text-center">
+            <h1>No Threads till now</h1>
+            <p>Go and Publish a thread to display here.</p>
         </div>
     <% end %>
 </div>
