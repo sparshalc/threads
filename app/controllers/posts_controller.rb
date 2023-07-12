@@ -24,7 +24,6 @@ class PostsController < ApplicationController
 
     def edit
     end
-
     def update
         if @post.update(post_params)
             redirect_to post_path(@post.id),notice: 'Post Updated!'
@@ -32,13 +31,10 @@ class PostsController < ApplicationController
                render :edit,status: :bad_request
            end
     end
-
     def destroy
         @post.destroy
         redirect_to posts_path, alert: 'Post was successfully deleted.'
       end
-      
-
     private
 
     def post_params

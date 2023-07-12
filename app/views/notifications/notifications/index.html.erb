@@ -1,12 +1,8 @@
 <div class="notifications ">
-  <div class="heading clearfix">
-    <!-- <%= t('notifications.all_notifications') %> -->
-
-
+  <div class="heading dfix">
   </div>
   <div class="list">
     <% if @notifications.blank? %>
-      <!-- <div class="no-records"><%= t('notifications.no_records') %></div> -->
       <div class="content mt-5">
         <div class="contNew"></div>
         <h2 class="fw-bold mt-5">No New Notification</h2>
@@ -18,7 +14,6 @@
     <% else %>
       <% @notification_groups.each do |group, notifications| %>
         <div class="notification-group">
-          <!-- <div class="group-title"><%= group %></div> -->
           <div class="content">
             <div class="contNew"></div>
             <h2 class="fw-bold mt-5">Notifications</h2>
@@ -29,8 +24,8 @@
         </div>
       <% end %>
       <div class="text-center">
-      <span class="pull-xs-right">
-        <%= link_to t('notifications.clean_all'), notifications.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
+      <span class="pull-xs-right d-flex justify-content-center">
+        <%= button_to t('notifications.clean_all'), notifications.clean_notifications_path, class: 'btn btn-sm btn-danger', method: 'delete' %>
         <%= link_to 'Go back', :back, class: 'btn text-secondary'%>
       </span>
     </div>

@@ -1,5 +1,5 @@
 <% if notification.second_target.present?   %>
-    <p class="white"><strong><%=notification.actor.email %></strong> has commented on your post <strong>'<%=  notification.second_target.title%>'</strong>. </p>
+    <p class="white"><strong><%=notification.actor.email %></strong> has commented on your post <strong><%=  notification.second_target.title.length > 100 ? notification.second_target.title.first(100) + ' . . .  .' : notification.second_target.title%></strong>. </p>
   <% else %>
   <p class="white"> <strong><%=notification.actor.email %></strong> has deleted the comment or the post has been deleted </p>
 

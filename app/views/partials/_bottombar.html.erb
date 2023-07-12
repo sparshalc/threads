@@ -5,9 +5,12 @@
   <% end %>
   <li><%= link_to profile_path(current_user) do%>
       <% if current_user.follow_requests.count > 0 %>
-        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        <i class="fa fa-link position-relative"></i>
+        <span class="position-absolute top-40 translate-middle p-2 bg-danger border border-light rounded-circle">
+          <span class="visually-hidden">New alerts</span>
+        </span>
       <% else %>
-          <i class="fa fa-wifi"></i>
+       <i class="fa fa-link"></i>
       <% end %>
       <% end %>
   </a></li>
@@ -16,8 +19,17 @@
     <span class="fa fa-globe"></span>
     <% end %>
   <% end %>
-  <li><%= link_to notifications_path do%>
-    <span class="fa fa-heart"></span>
+  <% if (Notification.unread_count(current_user) > 0)%>
+    <li><%= link_to notifications_path do%>
+      <span class="fa fa-heart position-relative"></span>
+      <span class="position-absolute top-20 translate-middle p-2 bg-danger border border-light rounded-circle">
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    <% end %>
+  <% else %>
+    <li><%= link_to notifications_path do%>
+      <span class="fa fa-heart "></span>
+    <% end %>
   <% end %>
   <li><%= link_to user_path(current_user) do%>
     <span class="fa fa-user"></span>

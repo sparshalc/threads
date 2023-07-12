@@ -8,9 +8,15 @@
     <div class="cont"> 
         <div class="posts">
             <div class="user-info">
+              <% if x.user.image.attached? %>
                 <div class="image">
                   <%= image_tag(x.user.image, class: 'profilePicture') %>
                 </div>
+                <% else %>
+                  <div class="image">
+                    <%= image_tag(('img/thread-white.png'), class: 'profilePicture') %>
+                  </div>
+                <% end %>
                 <div class="name-post">
                     <div class="name-time">
                         <p class="user-name"><%= x.user.email%> </p>
