@@ -96,6 +96,8 @@ GEM
       warden (~> 1.2.3)
     erubi (1.12.0)
     followability (1.1.1)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.14.1)
@@ -251,6 +253,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   followability (~> 1.1)
+  friendly_id (~> 5.4.0)
   importmap-rails
   jbuilder
   notifications (~> 1.1)

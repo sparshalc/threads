@@ -1,6 +1,6 @@
 class PostsController < ApplicationController 
     before_action :authenticate_user!
-    before_action :find_post, only: [:show,:edit,:update,:destroy]
+    before_action :find_post, only: [:edit,:update,:destroy]
     before_action :find_user,only: [:edit,:update,:destroy]
     def index
         @posts = Post.all.order("Created_at DESC")
@@ -19,6 +19,7 @@ class PostsController < ApplicationController
     end
 
     def show
+        @post = Post.friendly.find(params[:id])
         @post.update(views: @post.views+1)
         @comment = @post.comments.all
     end

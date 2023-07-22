@@ -80,3 +80,5 @@ gem "notifications", "~> 1.1"
 gem "followability", "~> 1.1"
 
 gem "ransack", "~> 4.0"
+
+gem 'friendly_id', '~> 5.4.0'

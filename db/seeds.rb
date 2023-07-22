@@ -9,13 +9,6 @@
 50.times do |x|
     Post.create!(
       title: "This is my #{x} post on this thread app",
-      user_id: 10
-    )
-end
-50.times do |x|
-    Comment.create!(
-      title: "I have commented #{x} time on this thread",
-      user_id: 10,
-      post_id: 158
+      user_id: 1
     )
 end
